@@ -1,0 +1,301 @@
+<dataSource name="MySQL - pm25@222.128.13.159">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="pm25">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="building" />
+    <schema id="3" name="campusdetection" />
+    <schema id="4" name="Find" />
+    <schema id="5" name="hougr" />
+    <schema id="6" name="information_schema" />
+    <schema id="7" name="mysql" />
+    <schema id="8" name="performance_schema" />
+    <schema id="9" name="temp_maria" />
+    <table id="10" parent="1" name="Dylos_pm25" />
+    <table id="11" parent="1" name="Sensor" />
+    <table id="12" parent="1" name="pm25_Station_Dylos" />
+    <table id="13" parent="1" name="t_pm25" />
+    <table id="14" parent="1" name="t_pm25_old" />
+    <table id="15" parent="1" name="t_result_data" />
+    <table id="16" parent="1" name="t_weater_data_old" />
+    <table id="17" parent="1" name="t_weather_data" />
+    <column id="18" parent="10" name="Time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>'0000-00-00 00:00:00'</default-expression>
+    </column>
+    <column id="19" parent="10" name="Small">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="20" parent="10" name="pm25">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="21" parent="10" name="Large">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <index id="22" parent="10" name="Candidate Key">
+      <columns>Time</columns>
+      <desc-columns />
+    </index>
+    <index id="23" parent="10" name="linshi">
+      <columns>pm25</columns>
+      <desc-columns />
+    </index>
+    <key id="24" parent="10" name="PRIMARY">
+      <columns>Time</columns>
+      <primary>1</primary>
+    </key>
+    <column id="25" parent="11" name="Id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="26" parent="11" name="time">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="27" parent="11" name="model">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="28" parent="11" name="name">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="29" parent="11" name="pm2.5">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="30" parent="11" name="temperature">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="31" parent="11" name="humidity">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="32" parent="11" name="longtitude">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="33" parent="11" name="latitude">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="34" parent="11" name="PRIMARY">
+      <columns>Id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="35" parent="12" name="time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>'0000-00-00 00:00:00'</default-expression>
+    </column>
+    <column id="36" parent="12" name="location_pm">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="37" parent="12" name="location_weather">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="38" parent="12" name="pm25_Station">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="39" parent="12" name="pm25_Dylos">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="40" parent="12" name="Temperature">
+      <data-type>float|0</data-type>
+    </column>
+    <column id="41" parent="12" name="Humidity">
+      <data-type>float|0</data-type>
+    </column>
+    <column id="42" parent="12" name="WindSpeed">
+      <data-type>float|0</data-type>
+    </column>
+    <column id="43" parent="12" name="Pressure">
+      <data-type>float|0</data-type>
+    </column>
+    <key id="44" parent="12" name="PRIMARY">
+      <columns>time</columns>
+      <primary>1</primary>
+    </key>
+    <column id="45" parent="13" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="46" parent="13" name="station_id">
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="47" parent="13" name="station_name">
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="48" parent="13" name="station_dic">
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="49" parent="13" name="city_id">
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="50" parent="13" name="lon">
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="51" parent="13" name="lat">
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="52" parent="13" name="pm25">
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="53" parent="13" name="pm10">
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="54" parent="13" name="co">
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="55" parent="13" name="no2">
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="56" parent="13" name="o3">
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="57" parent="13" name="so2">
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="58" parent="13" name="create_time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <key id="59" parent="13" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="60" parent="14" name="station_id">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="61" parent="14" name="time">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="62" parent="14" name="pm25">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="63" parent="14" name="pm10">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="64" parent="14" name="no2">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="65" parent="15" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="66" parent="15" name="longitude">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="67" parent="15" name="latitude">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="68" parent="15" name="phone_type">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="69" parent="15" name="pic_name">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="70" parent="15" name="predict_value">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="71" parent="15" name="create_date">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="72" parent="15" name="district_code">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="73" parent="15" name="city_code">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="74" parent="15" name="image_value">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="75" parent="15" name="weather_value">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="76" parent="15" name="id_UNIQUE">
+      <columns>id</columns>
+      <desc-columns />
+      <unique>1</unique>
+    </index>
+    <key id="77" parent="15" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="78" parent="15" name="id_UNIQUE">
+      <columns>id</columns>
+      <underlying-index>id_UNIQUE</underlying-index>
+    </key>
+    <column id="79" parent="16" name="dict_id">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="80" parent="16" name="time">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="81" parent="16" name="temperature">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="82" parent="16" name="pressure">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="83" parent="16" name="humidity">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="84" parent="16" name="wind_speed">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="85" parent="16" name="wind_dirction">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="86" parent="16" name="weahter">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="87" parent="17" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="88" parent="17" name="city_id">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="89" parent="17" name="city_name">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="90" parent="17" name="temperature">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="91" parent="17" name="pressure">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="92" parent="17" name="humidity">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="93" parent="17" name="wind_speed">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="94" parent="17" name="wind_direction_name">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="95" parent="17" name="wind_direction">
+      <data-type>varchar(30)|0</data-type>
+      <default-expression>'0'</default-expression>
+    </column>
+    <column id="96" parent="17" name="weather_name">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="97" parent="17" name="weather">
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="98" parent="17" name="collect_time">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="99" parent="17" name="extend">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="100" parent="17" name="create_date">
+      <data-type>datetime|0</data-type>
+    </column>
+    <key id="101" parent="17" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>

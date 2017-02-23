@@ -29,6 +29,7 @@ public class Before1h2h3hLocation implements ActionListener,MouseListener{
 	public JTextArea picDir;
 	public JButton button;
 	public Container content;
+
 	public JPanel txt;
 	public JLabel myLabel;
 

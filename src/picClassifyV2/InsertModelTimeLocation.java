@@ -79,6 +79,7 @@ public class InsertModelTimeLocation {
                     //String location=null;//拍摄站点位置
                     int piccount=list.length;//统计文件夹中所有的照片数
                     int addcount=0;//统计更新的照片数
+                    int addcountserver = 0; // calculate the number of updates
 
                     String model=null;//保存传感器型号
                     for(int i = 0; i < list.length; i++){//遍历每一张照片
@@ -141,7 +142,7 @@ public class InsertModelTimeLocation {
 
                             //System.out.println();
 
-							/*---------------------更新操作----------------*/
+							/*---------------------Update in local DB ----------------*/
 
                             //查看照片信息在DB中是否已存在
                             String lastdata="select * from sensor where name='"+name+"' and time='"+time+"';";
@@ -154,7 +155,17 @@ public class InsertModelTimeLocation {
                             }else{
                                 System.out.println("Exist in DB!!");
                             }
+                            /* ------------------Update in remote DB ----------------*/
 
+                            String last = "select * from Sensor where name = '" + name + "' and time = '" + time + "';";
+                            ResultSet resultRemote = serverBean.executeSQL(last);
+                            if (!resultRemote.next()) { // if not exsit in remote db
+                                String sql="insert into Sensor values(null,'"+time+"','"+model+"','"+name+"',null,null,null,'"+pointToLatlong(longitude)+"','"+pointToLatlong(latitude)+"');";
+                                int r = serverBean.executeUpdateSQL(sql);
+                                System.out.println("sql result:" + r);
+                                addcountserver++; // server update calculator ++
+
+                            }
 
                         } catch (ImageProcessingException e1) {
                             // TODO Auto-generated catch block
@@ -173,7 +184,7 @@ public class InsertModelTimeLocation {
                     //在GUI中显示结果
                     int sum=addcount;
                     TextField consoleInfo=new TextField();
-                    consoleInfo.setText(model+"处理完毕！共"+piccount+"张，新增"+sum+"张。");
+                    consoleInfo.setText(model+"处理完毕！共"+piccount+"张，新增"+sum+"张。" + "server add: " + addcountserver + "pictures.");
                     content.add(consoleInfo);
 
 

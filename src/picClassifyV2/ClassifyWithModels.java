@@ -161,7 +161,8 @@ public class ClassifyWithModels {
                             String oldFilePath=list[i].getAbsolutePath();//get pic path
                             String newFilePath="D:/´«¸ÐÆ÷ÕÕÆ¬/¸´ÖÆ/"+model+"/"+id+".jpg";
                             FileCopy(oldFilePath,newFilePath); // copy the file
-                            labelling(path);
+                            //labelling(path);
+                            remoteLabelling(newFilePath);
 
                         } catch (ImageProcessingException e1) {
                             // TODO Auto-generated catch block
@@ -213,8 +214,58 @@ public class ClassifyWithModels {
         Scanner in = new Scanner(System.in);
         while(in.hasNextLine()) {
             String str = in.nextLine();
-            if (str == "-1")
+            if (str == "-1") //
                 break;
         }
+    }
+    public void remoteLabelling(String path) {
+        // get the id from the path
+        String[] strArray = path.split("/");
+        String name = strArray[strArray.length - 1];
+        String[] array = name.split("\\.");
+        String id = array[0];
+        System.out.println("pic name is:" + name + "  and id is : " + id);
+
+        // check whether the data has been filled or not.
+        //String queryLocal = "select * from sensor where id = '" + id + "';";
+        String queryLocal = "select * from sensor where id = " + id + ";";
+        ResultSet r = localBean.executeSQL(queryLocal);
+        try {
+
+            if (r.next()) { // if set of the result set has the value
+                if (r.getString("pm25") != null || r.getString("temperature") != null || r.getString("humidity") != null)
+                    return ;
+            }
+
+        }catch (Exception e) {
+            System.out.println("error!");
+        }
+
+        // User input the sensor information
+        System.out.println("Input Pic NAME:" + path);
+        Scanner in = new Scanner(System.in);
+        String pm25 = in.next();
+        String temperature = in.next();
+        // -1 represents no temperature or humidity value
+        if (temperature.equals("-1")) temperature = null;
+        String humidity = in.next();
+        if (humidity.equals("-1")) humidity = null;
+        /*
+            for test
+         */
+        System.out.println("pm25:" + pm25 + " temperature: " + temperature + " humidity:" + humidity);
+
+        // update with local server
+        String updateLocal = "update sensor set pm25 = '" + pm25 + "', temperature = '" + temperature + "', humidity = '" + humidity + "' where id = '" + id + "';";
+        localBean.executeUpdateSQL(updateLocal);
+        // update with remote server
+        String updateRemote = "update Sensor set pm25 = '" + pm25 + "', temperature = '" + temperature + "', humidity = '" + humidity + "' where id = '" + id + "';";
+        serverBean.executeUpdateSQL(updateRemote);
+    }
+    public static void main(String[] args) {
+        ClassifyWithModels my = new ClassifyWithModels();
+        my.insertDB();
+        //String str = "IMG2312.JPG";
+        //my.remoteLabelling(str);
     }
 }
